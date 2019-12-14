@@ -2,20 +2,24 @@ package m3u
 
 import (
 	"bufio"
-	"github.com/PuerkitoBio/rehttp"
-	"github.com/otaconix/m3ufilter/config"
-	"github.com/otaconix/m3ufilter/logger"
 	"net/http"
 	"net/url"
 	"sort"
 	"time"
+
+	"github.com/PuerkitoBio/rehttp"
+	"github.com/otaconix/m3ufilter/config"
+	"github.com/otaconix/m3ufilter/logger"
 )
 
 var log = logger.Get()
-var client = NewClient(5, 10)
+var client *http.Client
+
+func InitializeClient(conf *config.Config) {
+	client = NewClient(5, conf.Core.HttpTimeout)
+}
 
 func GetPlaylist(conf *config.Config) (streams Streams, allFailed bool) {
-	var client = NewClient(5, conf.Core.HttpTimeout)
 	streams = Streams{}
 
 	errors := 0

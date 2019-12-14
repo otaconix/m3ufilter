@@ -2,13 +2,14 @@ package main
 
 import (
 	"flag"
+	"os"
+
 	"github.com/mitchellh/go-homedir"
 	"github.com/otaconix/m3ufilter/config"
 	"github.com/otaconix/m3ufilter/logger"
 	"github.com/otaconix/m3ufilter/m3u"
 	"github.com/otaconix/m3ufilter/server"
 	"github.com/otaconix/m3ufilter/writer"
-	"os"
 )
 
 func main() {
@@ -35,6 +36,7 @@ func run(configFilename string, stdout *os.File, stderr *os.File) {
 	log.SetOutput(stderr)
 
 	conf := config.New(configFilename)
+	m3u.InitializeClient(conf)
 	if conf.Core.ServerListen != "" {
 		server.Serve(conf)
 	} else {
