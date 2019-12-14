@@ -18,6 +18,7 @@ type Core struct {
 	Output           string
 	UpdateSchedule   string   `yaml:"update_schedule"`
 	GroupOrder       []string `yaml:"group_order"`
+	HttpTimeout      uint     `yaml:"http_timeout"`
 
 	groupOrderMap map[string]int
 }
@@ -59,6 +60,7 @@ func New(filepath string) *Config {
 			AutoReloadConfig: true,
 			UpdateSchedule:   "* */24 * * *",
 			Output:           "m3u",
+			HttpTimeout:      10,
 		},
 	}
 

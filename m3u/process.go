@@ -12,10 +12,10 @@ import (
 )
 
 var log = logger.Get()
-
-var client = NewClient(5)
+var client = NewClient(5, 10)
 
 func GetPlaylist(conf *config.Config) (streams Streams, allFailed bool) {
+	var client = NewClient(5, conf.Core.HttpTimeout)
 	streams = Streams{}
 
 	errors := 0
@@ -63,7 +63,7 @@ func GetPlaylist(conf *config.Config) (streams Streams, allFailed bool) {
 	return streams, len(conf.Providers) == errors
 }
 
-func NewClient(MaxRetryAttempts int) *http.Client {
+func NewClient(MaxRetryAttempts int, HttpTimeout uint) *http.Client {
 	transport := &http.Transport{}
 	transport.RegisterProtocol("file", http.NewFileTransport(http.Dir("/")))
 
@@ -77,7 +77,7 @@ func NewClient(MaxRetryAttempts int) *http.Client {
 		rehttp.ConstDelay(time.Second),
 	)
 	return &http.Client{
-		Timeout:   time.Second * 10,
+		Timeout:   time.Second * time.Duration(HttpTimeout),
 		Transport: tr,
 	}
 }
