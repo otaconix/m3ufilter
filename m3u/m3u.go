@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/hoshsadiq/m3ufilter/config"
+	"github.com/otaconix/m3ufilter/config"
 	"io"
 	"strings"
 	"time"

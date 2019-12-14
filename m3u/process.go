@@ -3,8 +3,8 @@ package m3u
 import (
 	"bufio"
 	"github.com/PuerkitoBio/rehttp"
-	"github.com/hoshsadiq/m3ufilter/config"
-	"github.com/hoshsadiq/m3ufilter/logger"
+	"github.com/otaconix/m3ufilter/config"
+	"github.com/otaconix/m3ufilter/logger"
 	"net/http"
 	"net/url"
 	"sort"

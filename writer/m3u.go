@@ -1,7 +1,7 @@
 package writer
 
 import (
-	"github.com/hoshsadiq/m3ufilter/m3u"
+	"github.com/otaconix/m3ufilter/m3u"
 	"io"
 	"strconv"
 	"strings"

@@ -1,4 +1,4 @@
-module github.com/hoshsadiq/m3ufilter
+module github.com/otaconix/m3ufilter
 
 require (
 	github.com/PuerkitoBio/rehttp v1.0.0

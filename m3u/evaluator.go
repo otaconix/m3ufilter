@@ -3,7 +3,7 @@ package m3u
 import (
 	"errors"
 	"fmt"
-	"github.com/hoshsadiq/m3ufilter/cache"
+	"github.com/otaconix/m3ufilter/cache"
 	"github.com/maja42/goval"
 	"strings"
 )

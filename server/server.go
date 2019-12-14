@@ -1,9 +1,9 @@
 package server
 
 import (
-	"github.com/hoshsadiq/m3ufilter/config"
-	"github.com/hoshsadiq/m3ufilter/logger"
-	"github.com/hoshsadiq/m3ufilter/m3u"
+	"github.com/otaconix/m3ufilter/config"
+	"github.com/otaconix/m3ufilter/logger"
+	"github.com/otaconix/m3ufilter/m3u"
 	"github.com/mileusna/crontab"
 	"net/http"
 )

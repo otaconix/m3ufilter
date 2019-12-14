@@ -2,8 +2,8 @@ package m3u
 
 import (
 	"encoding/json"
-	"github.com/hoshsadiq/m3ufilter/config"
-	"github.com/hoshsadiq/m3ufilter/logger"
+	"github.com/otaconix/m3ufilter/config"
+	"github.com/otaconix/m3ufilter/logger"
 	"github.com/sirupsen/logrus"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"

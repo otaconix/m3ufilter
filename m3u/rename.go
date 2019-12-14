@@ -1,7 +1,7 @@
 package m3u
 
 import (
-	"github.com/hoshsadiq/m3ufilter/config"
+	"github.com/otaconix/m3ufilter/config"
 )
 
 func setSegmentValues(ms *Stream, setters []*config.Setter) {

@@ -2,8 +2,8 @@ package server
 
 import (
 	"errors"
-	"github.com/hoshsadiq/m3ufilter/logger"
-	"github.com/hoshsadiq/m3ufilter/writer"
+	"github.com/otaconix/m3ufilter/logger"
+	"github.com/otaconix/m3ufilter/writer"
 	"net/http"
 )
 
