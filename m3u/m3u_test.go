@@ -2,10 +2,6 @@ package m3u
 
 import (
 	"encoding/json"
-	"github.com/otaconix/m3ufilter/config"
-	"github.com/otaconix/m3ufilter/logger"
-	"github.com/sirupsen/logrus"
-	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -13,6 +9,11 @@ import (
 	"sort"
 	"strings"
 	"testing"
+
+	"github.com/otaconix/m3ufilter/config"
+	"github.com/otaconix/m3ufilter/logger"
+	"github.com/sirupsen/logrus"
+	"gopkg.in/yaml.v2"
 )
 
 func TestGroupOrder(t *testing.T) {
@@ -97,7 +98,7 @@ func TestExtinfLineParser(t *testing.T) {
 	}
 
 	for i, test := range tests {
-		stream, err := parseExtinfLine(test.attrLine, test.urlLine)
+		stream, err := parseExtinfLine(test.attrLine, test.urlLine, 0)
 		if err != nil {
 			if test.errorText == "" {
 				t.Errorf("test %d, did not expect an error, got: %s", i, err)
@@ -166,7 +167,7 @@ func TestDecoder(t *testing.T) {
 				}
 
 				t.Logf("Test %s failed.", path)
-				t.Logf("  Expected streans: %s", expectedStreams)
+				t.Logf("  Expected streams: %s", expectedStreams)
 				t.Logf("  Got:              %s", actualStreams)
 				t.Fail()
 			}

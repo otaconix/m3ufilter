@@ -4,10 +4,11 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/otaconix/m3ufilter/config"
 	"io"
 	"strings"
 	"time"
+
+	"github.com/otaconix/m3ufilter/config"
 )
 
 var groupOrder map[string]int
@@ -19,17 +20,22 @@ func (s Streams) Len() int {
 }
 
 func (s Streams) Less(i, j int) bool {
-	iOrder, ok := groupOrder[s[i].Group]
-	if !ok {
+	iOrder, iOk := groupOrder[s[i].Group]
+	jOrder, jOk := groupOrder[s[j].Group]
+
+	if iOk && jOk {
+		if iOrder == jOrder {
+			return s[i].OriginalIndex < s[j].OriginalIndex
+		} else {
+			return iOrder < jOrder
+		}
+	} else if !iOk && !jOk {
+		return iOrder < jOrder
+	} else if !iOk {
+		return false
+	} else {
 		return true
 	}
-
-	jOrder, ok := groupOrder[s[j].Group]
-	if !ok {
-		return false
-	}
-
-	return iOrder < jOrder
 }
 
 func (s Streams) Swap(i, j int) {
@@ -37,9 +43,10 @@ func (s Streams) Swap(i, j int) {
 }
 
 type Stream struct {
-	Duration string
-	Name     string
-	Uri      string
+	Duration      string
+	Name          string
+	Uri           string
+	OriginalIndex uint
 
 	// these are attributes
 	ChNo    string `yaml:"chno"`
@@ -63,7 +70,7 @@ func decode(conf *config.Config, reader io.Reader, providerConfig *config.Provid
 	var eof bool
 	streams := Streams{}
 
-	lines := 0
+	var lines uint = 0
 	start := time.Now()
 	for !eof {
 		var extinfLine string
@@ -82,7 +89,7 @@ func decode(conf *config.Config, reader io.Reader, providerConfig *config.Provid
 		}
 
 		lines++
-		stream, err := parseExtinfLine(extinfLine, urlLine)
+		stream, err := parseExtinfLine(extinfLine, urlLine, lines)
 		if err != nil {
 			if providerConfig.IgnoreParseErrors {
 				continue
@@ -125,11 +132,11 @@ func getLine(buf *bytes.Buffer) (string, bool) {
 	return line, eof
 }
 
-func parseExtinfLine(attrline string, urlLine string) (*Stream, error) {
+func parseExtinfLine(attrline string, urlLine string, lineNumber uint) (*Stream, error) {
 	attrline = strings.TrimSpace(attrline)
 	urlLine = strings.TrimSpace(urlLine)
 
-	stream := &Stream{Uri: urlLine}
+	stream := &Stream{Uri: urlLine, OriginalIndex: lineNumber}
 	state := "duration"
 	key := ""
 	value := ""

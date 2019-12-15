@@ -9,6 +9,8 @@ streams:
   - duration: "-1"
     name: "Channel 1"
     uri: "http://url.com/1"
+    originalindex: 1
   - duration: "-1"
     name: "Channel 4"
     uri: "http://url.com/4"
+    originalindex: 4

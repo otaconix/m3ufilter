@@ -9,6 +9,7 @@ streams:
   - duration: "-1"
     name: "BBC One"
     uri: "http://url.com/1"
+    originalindex: 1
     tvg-id: "bbc1.uk"
     tvg-name: "BBC One"
     tvg-logo: "http://x.y/smt"
@@ -16,6 +17,7 @@ streams:
   - duration: "-1"
     name: "Channel 4"
     uri: "http://url.com/2"
+    originalindex: 2
     tvg-id: "channel4.uk"
     tvg-name: "Channel 4"
     tvg-logo: "http://imgur.com/channel4.uk"
@@ -23,12 +25,15 @@ streams:
   - duration: "-1"
     name: "Channel 3"
     uri: "http://url.com/3"
+    originalindex: 3
     tvg-name: "Channel 3"
     group-title: "Group4"
   - duration: "-1"
     name: "Channel 3"
     uri: "http://url.com/4"
+    originalindex: 4
   - duration: "-1"
     name: "Overwrite tvg-name"
     uri: "http://url.com/5"
+    originalindex: 5
     tvg-name: "overwritten tvg-name"
